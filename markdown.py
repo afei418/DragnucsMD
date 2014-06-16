@@ -199,8 +199,8 @@ class DragnucsMD(Gtk.Application):
                    license_type=Gtk.License.GPL_3_0,
                    icon_name=None,
                    comments="A little tool to preview Markdown documents",
-                   authors=["Mohamed-Touhami MAHDI <dragnucs@gmail.com>"],
-                   website="http://dragnucsmd.dragnucs.com/",
+                   authors=["Mohamed-Touhami MAHDI <dragnucs@legtux.com>"],
+                   website="https://github.com/Dragnucs/DragnucsMD",
                    website_label="DragnucsMD homepage",
                    copyright="Copyright \xc2\xa9 2014 Mohamed-Touhami MAHDI")
         dialog.run()
