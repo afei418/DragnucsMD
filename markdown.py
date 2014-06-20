@@ -134,7 +134,7 @@ class MainWindow(Gtk.ApplicationWindow):
         self.load("")
 
         if(self.args.file):
-            file = open(self.args.file)
+            file = open(self.args.file, 'r')
             content = file.read()
             self.load(content)
             file.close()
