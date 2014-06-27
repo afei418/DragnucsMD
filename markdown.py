@@ -124,6 +124,10 @@ class MainWindow(Gtk.ApplicationWindow):
         hb.props.title = "DragnucsMD"
         self.set_titlebar(hb)
 
+        btn_open = Gtk.Button("Open")
+        btn_open.connect('clicked', self.on_btn_open_clicked)
+        hb.pack_start(btn_open)
+
         # The webkit widget to view the document
         scrolled_view = Gtk.ScrolledWindow()
         scrolled_view.set_hexpand(True)
@@ -140,6 +144,23 @@ class MainWindow(Gtk.ApplicationWindow):
             file.close()
             hb.props.title=self.args.file
             hb.props.subtitle=os.path.abspath(self.args.file)
+
+    def on_btn_open_clicked(self, button):
+        """Open dialog to load an existing file"""
+        dlg_open = Gtk.FileChooserDialog(title="Open file",
+                                         parent=self,
+                                         action=Gtk.FileChooserAction.OPEN,
+                                         buttons=["Open", Gtk.ResponseType.ACCEPT,
+                                                  "Cancel", Gtk.ResponseType.CANCEL])
+        dlg_open.set_default_response(Gtk.ResponseType.ACCEPT)
+        res = dlg_open.run()
+
+        if res == Gtk.ResponseType.ACCEPT:
+            file = open(dlg_open.get_filename(), 'r')
+
+            self.load (file.read())
+
+        dlg_open.destroy()
 
     def load(self, content):
         extras_list = ["code-friendly",
