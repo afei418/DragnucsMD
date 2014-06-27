@@ -157,7 +157,6 @@ class MainWindow(Gtk.ApplicationWindow):
 
         if res == Gtk.ResponseType.ACCEPT:
             file = open(dlg_open.get_filename(), 'r')
-
             self.load (file.read())
 
         dlg_open.destroy()
