@@ -17,11 +17,13 @@
 
 import sys, os
 
-from gi.repository import Gtk, Gio, WebKit
+from gi.repository import Gtk, Gio, WebKit, GObject
 
 import argparse
 import markdown2
 from string import Template
+
+import logging
 
 APP_MENU = """<interface>
   <menu id="appmenu">
@@ -119,14 +121,14 @@ class MainWindow(Gtk.ApplicationWindow):
         self.set_default_icon_name("text-x-generic")
 
         # HeaderBar
-        hb = Gtk.HeaderBar()
-        hb.props.show_close_button = True
-        hb.props.title = "DragnucsMD"
-        self.set_titlebar(hb)
+        self.hb = Gtk.HeaderBar()
+        self.hb.props.show_close_button = True
+        self.hb.props.title = "DragnucsMD"
+        self.set_titlebar(self.hb)
 
         btn_open = Gtk.Button("Open")
         btn_open.connect('clicked', self.on_btn_open_clicked)
-        hb.pack_start(btn_open)
+        self.hb.pack_start(btn_open)
 
         # The webkit widget to view the document
         scrolled_view = Gtk.ScrolledWindow()
@@ -135,33 +137,49 @@ class MainWindow(Gtk.ApplicationWindow):
         self.view = WebKit.WebView()
         scrolled_view.add(self.view)
         self.add(scrolled_view)
-        self.load("")
 
         if(self.args.file):
-            file = open(self.args.file, 'r')
-            content = file.read()
-            self.load(content)
-            file.close()
-            hb.props.title=self.args.file
-            hb.props.subtitle=os.path.abspath(self.args.file)
+            self.load(self.args.file)
+        else:
+            self.load("")
 
     def on_btn_open_clicked(self, button):
         """Open dialog to load an existing file"""
-        dlg_open = Gtk.FileChooserDialog(title="Open file",
-                                         parent=self,
-                                         action=Gtk.FileChooserAction.OPEN,
-                                         buttons=["Open", Gtk.ResponseType.ACCEPT,
-                                                  "Cancel", Gtk.ResponseType.CANCEL])
-        dlg_open.set_default_response(Gtk.ResponseType.ACCEPT)
-        res = dlg_open.run()
+        opn = Gtk.FileChooserDialog(title="Open file",
+                                    parent=self,
+                                    action=Gtk.FileChooserAction.OPEN,
+                                    buttons=["Open", Gtk.ResponseType.ACCEPT,
+                                             "Cancel", Gtk.ResponseType.CANCEL])
+        opn.set_default_response(Gtk.ResponseType.ACCEPT)
+        res = opn.run()
 
         if res == Gtk.ResponseType.ACCEPT:
-            file = open(dlg_open.get_filename(), 'r')
-            self.load (file.read())
+            self.load (opn.get_filename())
 
-        dlg_open.destroy()
+        opn.destroy()
 
-    def load(self, content):
+    def changed(self, monitor, file, other_file, event):
+        self.load(file.get_path())
+
+    def load(self, filename):
+        """Loads a file, parse it and shows it"""
+        if os.path.exists(filename):
+            self.hb.props.title = os.path.basename(filename)
+            self.hb.props.subtitle = filename
+
+            # To monitor the file for changes
+            try:
+                self.monitor.cancel()
+            except AttributeError:
+                pass
+            self.monitor = Gio.File.new_for_path(filename)\
+                         .monitor_file(Gio.FileMonitorFlags.NONE, None)
+            self.monitor.connect('changed', self.changed)
+
+            file = open(filename, 'r')
+            content = file.read()
+        else:
+            content = ""
         extras_list = ["code-friendly",
                        "cuddled-lists",
                        "fenced-code-blocks",

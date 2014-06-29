@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2014 Mohamed-Touhami MAHDI <dragnucs@legtux.org> -->
+<application>
+ <id type="desktop">com.dragnucs.dragnucsmd</id>
+ <licence>CC0</licence>
+ <description>
+  <p>DragnucsMD is a native and lightweight GTK+ 3 Markdown files viwer.</p>
+ </description>
+ <url type="homepage">https://github.com/Dragnucs/DragnucsMD</url>
+ <screenshots>
+  <screenshot width="762" type="default" height="562">https://raw.githubusercontent.com/Dragnucs/DragnucsMD/master/dragnucsmd.png</screenshot>
+ </screenshots>
+ <updatecontact>dragnucs@legtux.org</updatecontact>
+</application>

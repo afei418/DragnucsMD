@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=DragnucsMD
+Exec=/bin/dragnucsmd.py
+Type=Application
+Icon=text-x-generic
+Comment=A simple Markdown viewer and editor
+Categories=GTK;GNOME;Utility;Office;Viewer;TextTools;
+MimeType=text/x-markdown
+
+[Desktop Action Open]
+Name=Open a file
+Exec=/bin/dragnucsmd.py -f %f
+MimeType=text/x-markdown
