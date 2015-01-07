@@ -48,61 +48,61 @@ TEMPLATE = Template("""<!DOCTYPE html>
         <title>DragnucsMD</title>
         <style>
             body {
-				background-color: #002b36;
-				color: #839496;
-				font-family: "Droid sans", Droid, sans;
-			}
+	            background-color: #002b36;
+	            color: #839496;
+	            font-family: "Droid sans", Droid, sans;
+            }
 
-			h1, h2, h3, h4, h5n h6 {
-				color: #b58900;
-				border-bottom: 1px solid #073642;
-				font-family: Inconsolata, "Source pro";
-			}
+            h1, h2, h3, h4, h5n h6 {
+	            color: #b58900;
+	            border-bottom: 1px solid #073642;
+	            font-family: Inconsolata, "Source pro";
+            }
 
-			a {
-				text-decoration: underline;
-				color: whitesmoke;
-			}
+            a {
+	            text-decoration: underline;
+	            color: whitesmoke;
+            }
 
-			p {
-				indent: 10px;
-			}
+            p {
+	            indent: 10px;
+            }
 
-			pre {
-				border-radius: 3px;
-				border: 1px solid #586e75;
-				background-color: #073642;
-				padding: 4px;
-			}
+            pre {
+	            border-radius: 3px;
+	            border: 1px solid #586e75;
+	            background-color: #073642;
+	            padding: 4px;
+            }
 
-			blockquote {
-				font-family: "Droid serif", "Liberation serif", serif;
-				background-color: #073642;
-				padding: 1px 20px;
-			}
+            blockquote {
+	            font-family: "Droid serif", "Liberation serif", serif;
+	            background-color: #073642;
+	            padding: 1px 20px;
+            }
 
-			hr {
-				border: none;
-				border-bottom: 1px solid #2aa198;
-			}
+            hr {
+	            border: none;
+	            border-bottom: 1px solid #2aa198;
+            }
 
-			table {
-				width: 100%;
-			}
+            table {
+	            width: 100%;
+            }
 
-			tr:nth-child(2n+1) {
-				background-color: #002b36;
-			}
+            tr:nth-child(2n+1) {
+	            background-color: #002b36;
+            }
 
-			tr:nth-child(2n) {
-				background-color: #073642;
-			}
+            tr:nth-child(2n) {
+	            background-color: #073642;
+            }
 
-			tr:first-child {
-				color: #b58900;
-				font-weight: bold;
-				text-transform: capitalize;
-			}
+            tr:first-child {
+	            color: #b58900;
+	            font-weight: bold;
+	            text-transform: capitalize;
+            }
         </style>
     </head>
     <body>
